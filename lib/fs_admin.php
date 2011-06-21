@@ -1,6 +1,6 @@
 <?php
 
-
+// Main Plugin Class
 
 class WP_FlightStats{
 	
