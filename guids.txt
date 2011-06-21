@@ -1,3 +1,8 @@
+
+GitHub Push Command to bypass SSL certificate
+
+env GIT_SSL_NO_VERIFY=true git push https://viljoen8504@github.com/viljoen8504/WP-Flightstats.git
+
 <!--
 
 Request URL
