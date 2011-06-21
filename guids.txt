@@ -1,0 +1,56 @@
+<!--
+
+Request URL
+
+http://www.flightstats.com/go/rss/flightStatusByRoute.do?
+
+-->
+
+
+<!-- flightStatusByAirport = 34b64945a69b9cac:-290d33bd:130b174b3ac:31a2 
+
+	airportCode - FlightStats 3 letter airport code (required) of airport
+	airportQueryType- 0 = Departures (default), 1 = Arrival
+	airportQueryTimePeriod - Not specified (Default) - Current time period at airport
+	1 - Midnight through 02:59
+	2 - 03:00 through 05:59
+	3 - 06:00 through 08:59
+	4 - 09:00 through 11:59
+	5 - 12:00 through 14:59
+	6 - 15:00 through 16:59
+	7 - 18:00 through 20:59
+	8 - 21:00 through 23:59
+	codeshareDisplay - 0 (Default) = Operated & codeshare, 1 = Operated only
+	sortField - The field that will be used to determine sort order.
+	0 - (Default)
+	1 - By Flight Number
+	2 - By Carrier
+	3 - By Scheduled Departure
+	4 - By Actual Departure
+	5 - By Scheduled Arrival
+	6 - By Actual Arrival
+	7 - By Status
+	sortDirection - 0 (Default) = Ascending, 1 = Descending,
+	airportQueryDate - 'yyyy-MM-dd' - (Not specified is current date at airport). Acceptable values are current date +- 1 day.
+	mobileLinks - true or false (default) - Generates links that takes user to FlightStats Mobile instead of FlightStats.com - Use this if you are displaying on a mobile device
+
+-->
+
+<!-- flightStatusByRoute = 34b64945a69b9cac:-290d33bd:130b174b3ac:33cf  
+
+	departureCode - FlightStats 3 letter airport code (required) of departure airport
+	arrivalCode - FlightStats 3 letter airport code (required) of arrival airport
+	departureDate - 'yyyy-MM-dd' - (Not specified is current date). Acceptable values are current date +- 1 day.
+	mobileLinks - true or false (default) - Generates links that takes user to FlightStats Mobile instead of FlightStats.com - Use this if you are displaying on a mobile device.
+
+-->
+
+<!-- flightStatusByFlight = 34b64945a69b9cac:-290d33bd:130b174b3ac:2eb6 
+
+	airlineCode - FlightStats 2 or 3 letter airline code (required). This is typically the IATA or ICAO code.
+	flightNumber - The flight number for the flight (required)
+	departureDate - 'yyyy-MM-dd' - (Not specified is current date). Acceptable values are current date +- 1 day.
+	departureAirportCode - If specified, this narrows the response to a single flight segment
+	mobileLinks - true or false (default) - Generates links that takes user to FlightStats Mobile instead of FlightStats.com - Use this if you are displaying on a mobile device
+
+-->

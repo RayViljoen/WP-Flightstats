@@ -1,9 +1,21 @@
 <?php
 /*
-Plugin Name: WP Flightstats
+Plugin Name: WP FlightStats
 Plugin URI: http://catn.com
-Description: WordPress plugin for use with Flightstats account. Creates UI for flight arrivals & departures.
+Description: WordPress plugin for use with FlightStats account. Creates UI for flight arrivals & departures.
 Version: 1.0
 Author: Ray Viljoen
 Author URI: http://fubra.com
 */
+
+error_reporting(E_ALL);
+ini_set('display_errors','On');
+
+
+// Include FlightStats Class
+require 'lib/fs_admin.php';
+
+
+$flightstats = new WP_FlightStats();
+
+add_action('admin_menu', array( $flightstats, 'fs_admin' ) );
