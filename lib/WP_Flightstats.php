@@ -20,9 +20,9 @@ class WP_FlightStats{
 		if( !get_option('FS_Options_Set') )
 		{
 			// Create FlightStats account "wp_option" placeholders to avoid checking existence later.
-			add_option( 'FS_username', 'FlightStats Username / User ID' );
-			add_option( 'FS_account', 'FlightStats Account ID' );
-			add_option( 'FS_password', 'FlightStats Password' );
+			add_option( 'FS_username', 'Username / User ID' );
+			add_option( 'FS_account', 'Account ID' );
+			add_option( 'FS_password', 'Password' );
 			add_option( 'FS_GUID_airport', 'FlightStatusByAirport GUID' );
 			add_option( 'FS_GUID_route', 'FlightStatusByRoute GUID' );
 			add_option( 'FS_GUID_flight', 'FlightStatusByFlight GUID' );
