@@ -18,4 +18,5 @@ require 'lib/WP_Flightstats.php';
 
 $flightstats = new WP_FlightStats();
 
+// Admin menu hook
 add_action('admin_menu', array( $flightstats, 'fs_admin' ) );
