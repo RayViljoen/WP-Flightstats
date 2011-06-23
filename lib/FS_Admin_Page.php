@@ -65,7 +65,7 @@
 </head>
 
 <body>
-    <a class="FS-Logo" href="http://www.flightstats.com/" target="_blank"><img src="<?php echo WP_PLUGIN_URL; ?>/WP-Flightstats/logo.png"></a>
+    <a class="FS-Logo" href="http://www.flightstats.com/" target="_blank"><img src="<?php echo WP_PLUGIN_URL; ?>/WP-Flightstats/resources/logo.png"></a>
     <form id="FS-Admin" method="post" action="">
         <input type="hidden" name="flightstats_account_updated" value="FS">
 

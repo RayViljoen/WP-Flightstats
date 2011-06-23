@@ -8,8 +8,14 @@ Author: Ray Viljoen
 Author URI: http://fubra.com
 */
 
-error_reporting(E_ALL);
-ini_set('display_errors','On');
+
+// --------------------------------- 
+// ----- REMOVE BEFORE RELEASE ----- 
+// --------------------------------- 
+	error_reporting(E_ALL);
+	ini_set('display_errors','On');
+// ---------------------------------
+// --------------------------------- 
 
 
 // Include FlightStats Class

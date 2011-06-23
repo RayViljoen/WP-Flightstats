@@ -3,6 +3,9 @@
 // Main Plugin Class
 
 class WP_FlightStats{
+	
+	// FLIGHTSTATS RSS QUERY URL
+	define( FS_RSS, 'http://www.flightstats.com/go/rss/flightStatusByRoute.do?' );
 
 	// Account Variables
 	private
@@ -20,12 +23,12 @@ class WP_FlightStats{
 		if( !get_option('FS_Options_Set') )
 		{
 			// Create FlightStats account "wp_option" placeholders to avoid checking existence later.
-			add_option( 'FS_username', 'Username / User ID' );
-			add_option( 'FS_account', 'Account ID' );
-			add_option( 'FS_password', 'Password' );
-			add_option( 'FS_GUID_airport', 'FlightStatusByAirport GUID' );
-			add_option( 'FS_GUID_route', 'FlightStatusByRoute GUID' );
-			add_option( 'FS_GUID_flight', 'FlightStatusByFlight GUID' );
+			add_option( 'FS_username', '' );
+			add_option( 'FS_account', '' );
+			add_option( 'FS_password', '' );
+			add_option( 'FS_GUID_airport', '' );
+			add_option( 'FS_GUID_route', '' );
+			add_option( 'FS_GUID_flight', '' );
 
 			// Set 'FS_Options_Set' to avoid overwriting options with placeholders
 			// Alternitively used for clearing account settings and overwriting with placeholders
@@ -46,17 +49,16 @@ class WP_FlightStats{
 	{
 		add_menu_page( "FlightStats", "FlightStats", "manage_options", "flightstats", array( $this, 'create_admin_page' ) );
 	}
-
+	
+	// OUTPUT ADMIN PAGE FROM 'FS_Admin_Page.php'
 	public function create_admin_page()
 	{
-
 		if (!current_user_can('manage_options'))
 			{wp_die( __('You do not have sufficient permissions to access this page.') );}
 		
 		// INCLUDE ADMIN PAGE CONTENT
 		require 'FS_Admin_Page.php';
-		
-
 	}
+
 
 }
