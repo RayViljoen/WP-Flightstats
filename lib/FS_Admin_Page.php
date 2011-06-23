@@ -62,6 +62,9 @@
 		margin: 70px 0 0 20px;
 		padding: 0;
 	}
+	#FS-Admin .delete-button{
+		float: right;
+	}
     </style>
 
     <a class="FS-Logo" href="http://www.flightstats.com/" target="_blank"><img src="<?php echo WP_PLUGIN_URL; ?>/WP-Flightstats/resources/logo.png"></a>
@@ -72,7 +75,7 @@
     <?php endif; ?>
 
     <form id="FS-Admin" method="post" action="">
-        <input type="hidden" name="flightstats_account_updated">
+        <input type="hidden" name="flightstats_admin_submitted">
 
         <h3>
         	FlightStats Account Settings
@@ -97,7 +100,8 @@
         <p class="guid"><label for="FS_GUID_flight">FlightStatusByFlight GUID:</label><input placeholder="FlightStatusByFlight GUID" id="FS_GUID_flight" type="text" name="FS_GUID_flight" value="<?php echo $this->FS_GUID_flight; ?>"></p>
 
     	<p class="submit">
-			<input type="submit" name="Submit" class="button-primary" value="Save Changes">
+			<input type="submit" name="FS_Update" class="button-primary" value="Save Changes">
+			<input type="submit" name="FS_Delete" class="delete-button" value="Delete Account Settings">
 		</p>
     </form>
     <p id="catn_badge">Brought to you by the experts at <a href="http://catn.com">CatN.</a></p>

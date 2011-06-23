@@ -45,17 +45,17 @@ class WP_FlightStats{
 
 		// REGISTER WORDPRESS HOOKS
 
-		// ADMIN ACTION HOOK TO 'fs_admin' METHOD
+		// ADMIN ACTION HOOK TO 'fs_admin()'
 		add_action('admin_menu', array( $this, 'fs_admin' ) );
 
-		// SHORTCODE HOOK TO 'fs_shortcode' METHOD
+		// SHORTCODE HOOK TO 'fs_shortcode()'
 		add_shortcode( 'flightstats', array( $this, 'fs_shortcode' ) );
 
 	} // ***  __construct END ***
 
 
 
-	// REGISTER ADMIN PAGE AND CALL "create_admin_page" METHOD TO CREATE PAGE
+	// REGISTER ADMIN PAGE AND CALL "create_admin_page()" TO CREATE PAGE
 	public function fs_admin()
 	{
 		add_menu_page( "FlightStats", "FlightStats", "manage_options", "flightstats", array( $this, 'create_admin_page' ) );
@@ -70,9 +70,15 @@ class WP_FlightStats{
 		if (!current_user_can('manage_options'))
 			{wp_die( __('You do not have sufficient permissions to access this page.') );}
 		
-		// CHECK IF SETTING HAS BEEN SAVED AND CALL 'flightstats_account_updated' METHOD
-		if ( isset($_POST['flightstats_account_updated']) )
-			{ $this->fs_update_account_settings(); }
+		// CHECK IF SETTING ADMIN FORM HAS BEEN SUBMITTED
+		if ( isset($_POST['flightstats_admin_submitted']) )
+		{			
+			// CHECK IF USER WANTS TO DELETE ACCOUNT SETTINGS AND CALL 'flightstats_account_reset()'
+			if ( isset($_POST['FS_Delete']) )
+				 { $this->flightstats_account_reset(); }
+			// ELSE UPDATE SETTING WITH 'fs_update_account_settings()'
+			else { $this->fs_update_account_settings(); }
+		}	
 
 		// INCLUDE ADMIN PAGE HTML CONTENT
 		require 'FS_Admin_Page.php';
@@ -82,6 +88,14 @@ class WP_FlightStats{
 
 	// CALLED WHEN ACCOUNT SETTINGS ARE UPDATED IN THE FS ADMIN MENU
 	private function fs_update_account_settings()
+	{
+		echo '<pre>';
+		var_dump($_POST);
+		echo '</pre>';
+	}
+
+	// CALLED WHEN ACCOUNT SETTINGS ARE DELETED IN THE FS ADMIN MENU
+	private function flightstats_account_reset()
 	{
 		echo '<pre>';
 		var_dump($_POST);
