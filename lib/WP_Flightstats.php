@@ -5,7 +5,7 @@
 class WP_FlightStats{
 	
 	// FLIGHTSTATS RSS QUERY URL
-	define( FS_RSS, 'http://www.flightstats.com/go/rss/flightStatusByRoute.do?' );
+	const FS_RSS = 'http://www.flightstats.com/go/rss/flightStatusByRoute.do?';
 
 	// Account Variables
 	private

@@ -79,8 +79,9 @@
 
         <p><label for="FS_password">Password:</label><input placeholder="Password" id="FS_password" type="password" name="FS_password" value="<?php echo $this->fs_password; ?>"></p>
 		
-		<p class="guid_descr"><span>The plugin will provide extended search options based on the GUIDs supplied.</span><br />
-		* Minimum 1 GUID is required for the plugin to function.
+		<p class="guid_descr">
+			<span>The plugin will provide extended search options based on the GUIDs supplied.</span>
+			<br />* Minimum 1 GUID is required for the plugin to function.
 		</p>
 		
         <p class="guid"><label for="FS_GUID_airport">FlightStatusByAirport GUID:</label><input placeholder="FlightStatusByAirport GUID" id="FS_GUID_airport" type="text" name="FS_account" value="<?php echo $this->fs_guid_airport; ?>"></p>
