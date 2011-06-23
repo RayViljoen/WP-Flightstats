@@ -18,7 +18,8 @@ class WP_FlightStats{
 
 	// CONSTRUCTOR TO SET PLACEHOLDERS ON ACTIVATION OR SET ACCOUNT VARIABLES TO STORED OPTIONS
 	public function __construct()
-	{
+	{	
+
 		// Check if options has been set or alternitively set on activation
 		if( !get_option('FS_Options_Set') )
 		{
@@ -42,6 +43,14 @@ class WP_FlightStats{
 		$this->fs_guid_airport = get_option('FS_GUID_airport');
 		$this->fs_guid_route = get_option('FS_GUID_route');
 		$this->fs_guid_flight = get_option('FS_GUID_flight');
+		
+		
+		// ADD ADMIN ACTION HOOK TO 'fs_admin'
+		add_action('admin_menu', array( $this, 'fs_admin' ) );
+		
+		// ADD SHORTCODE AND HOOK TO 'fs_shortcode'
+		add_shortcode( 'flightstats', array( $this, 'fs_shortcode' ) );
+
 	}
 
 	// CREATE ADMIN PAGE AND CALL "create_admin_page" METHOD TO CREATE PAGE
@@ -59,6 +68,17 @@ class WP_FlightStats{
 		// INCLUDE ADMIN PAGE CONTENT
 		require 'FS_Admin_Page.php';
 	}
+	
+	// CALLED WHEN SHORTCODE IS USED - RESPONSIBLE FOR SHORTCODE OUTPUT
+	private function fs_shortcode()
+	{	
+	
+		// OUTPUT SHORTCODE CONTENT
+		
+	}
+
+	
+	
 
 
 }

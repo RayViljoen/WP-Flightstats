@@ -18,11 +18,9 @@ Author URI: http://fubra.com
 // --------------------------------- 
 
 
-// Include FlightStats Class
-require 'lib/WP_Flightstats.php';
+// INCLUDE REQUIRED CLASSES
+require 'lib/WP_FlightStats.php';
 
 
-$flightstats = new WP_FlightStats();
-
-// Admin menu hook
-add_action('admin_menu', array( $flightstats, 'fs_admin' ) );
+	// INITIALISE MAIN CLASS
+	$FS_Instance = new WP_FlightStats();
