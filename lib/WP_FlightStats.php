@@ -41,10 +41,10 @@ class WP_FlightStats{
 		// REGISTER WORDPRESS HOOKS
 
 		// ADMIN ACTION HOOK TO 'fs_admin()'
-		add_action('admin_menu', array( $this, 'fs_admin' ) );
+		add_action('admin_menu', array( &$this, 'fs_admin_auth' ) );
 
 		// SHORTCODE HOOK TO 'fs_shortcode()'
-		add_shortcode( 'flightstats', array( $this, 'fs_shortcode' ) );
+		add_shortcode( 'flightstats', array( &$this, 'fs_shortcode' ) );
 
 	} // ***  __construct END ***
 	
@@ -64,15 +64,15 @@ class WP_FlightStats{
 
 
 	// REGISTER ADMIN PAGE AND CALL "create_admin_page()" TO CREATE PAGE
-	public function fs_admin()
+	public function fs_admin_auth()
 	{
-		add_menu_page( "FlightStats", "FlightStats", "manage_options", "flightstats", array( $this, 'create_admin_page' ) );
+		add_menu_page( "FlightStats", "FlightStats", "manage_options", "flightstats", array( &$this, 'create_fs_admin' ) );
 	}
 
 
 
 	// OUTPUT ADMIN PAGE HTML FROM 'FS_Admin_Page.php'
-	public function create_admin_page()
+	public function create_fs_admin()
 	{
 		// CHECK USER CAN MANAGE OPTIONS
 		if (!current_user_can('manage_options'))

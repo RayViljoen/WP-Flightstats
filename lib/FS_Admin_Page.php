@@ -110,7 +110,4 @@
 
     	<p class="submit">
 			<input type="submit" name="FS_Update" class="button-primary" value="Save Changes">
-			<input type="submit" name="FS_Delete" class="delete-button" value="Delete Account Settings">
-		</p>
-    </form>
-    <p id="catn_badge">Brought to you by the experts at <a href="http://catn.com">CatN.</a></p>
+			<input type="submit" name="FS_Delete" class="del
