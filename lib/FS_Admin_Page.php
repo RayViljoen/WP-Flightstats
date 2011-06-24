@@ -27,9 +27,11 @@
     #FS-Admin p input{
         width: 150px;
         padding: 5px;
+        color: #505050;
+        font-weight: bold;
     }
     #FS-Admin p.guid input{
-        width: 320px;
+        width: 330px;
     }
     #FS-Admin .fs_dev_link{
     	float: right;
@@ -62,6 +64,13 @@
 		margin: 70px 0 0 20px;
 		padding: 0;
 	}
+	#FS-Admin p.submit input{
+		color: #fff;
+	}
+	#FS-Admin p.submit input.delete-button{
+		color: #505050;
+	}
+
 	#FS-Admin .delete-button{
 		float: right;
 	}
@@ -82,9 +91,9 @@
         	<a class="fs_dev_link" target="_blank" href="https://www.flightstats.com/developers/">Flightstats Developer Center</a>
 		</h3>
 
-        <p><label for="FS_account">Account ID:</label><input placeholder="Username / User ID" id="FS_account" type="text" name="FS_account" value="<?php echo $this->FS_account; ?>"></p>
+        <p><label for="FS_account">Account ID:</label><input placeholder="Account ID" id="FS_account" type="text" name="FS_account" value="<?php echo $this->FS_account; ?>"></p>
 
-        <p><label for="FS_username">Username:</label><input placeholder="Account ID" id="FS_username" type="text" name="FS_username" value="<?php echo $this->FS_username; ?>"></p>
+        <p><label for="FS_username">Username:</label><input placeholder="Username / User ID" id="FS_username" type="text" name="FS_username" value="<?php echo $this->FS_username; ?>"></p>
 
         <p><label for="FS_password">Password:</label><input placeholder="Password" id="FS_password" type="password" name="FS_password" value="<?php echo $this->FS_password; ?>"></p>
 

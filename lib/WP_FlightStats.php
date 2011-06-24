@@ -9,7 +9,7 @@ class WP_FlightStats{
 
 	/*************************************************************
 	 * FLIGHTSTATS ACCOUNT OPTIONS:
-	 * EACH OPTION WILL CREATE A INSTANCE VARIABLE ACCESSIBLE WITH THE SAME NAME AS THE ARRAY OPTION
+	 * EACH OPTION WILL CREATE AN INSTANCE VARIABLE ACCESSIBLE WITH THE SAME NAME AS THE ARRAY OPTION
 	 * E.G. $this->FS_username
 	 *************************************************************/
 	private $account_options = array(
@@ -34,15 +34,10 @@ class WP_FlightStats{
 			// Set 'FS_Options_Set' so options are only created on activation.
 			add_option( 'FS_Options_Set', 'true' );
 		}
-
-		// LOOP OVER ACCOUNT OPTIONS ARRAY AND CREAT INSTANCE VARIABLES FOR EACH OPTION
-		// ALSO SET EACH TO THE CORRESPONDING WP_OPTION
-		foreach( $this->account_options as $fs_account_ivar ){
-
-			// create ivar    // set ivar to option with same name
-			$this->{$fs_account_ivar} = get_option($fs_account_ivar);
-		}
-
+		
+		// CREATE INSTANCE VARIABLES FOR ACCOUNT SETTINGS
+		$this->update_fs_ivars();
+		
 		// REGISTER WORDPRESS HOOKS
 
 		// ADMIN ACTION HOOK TO 'fs_admin()'
@@ -52,7 +47,20 @@ class WP_FlightStats{
 		add_shortcode( 'flightstats', array( $this, 'fs_shortcode' ) );
 
 	} // ***  __construct END ***
-
+	
+	
+	
+	// USED TO CREATE & UPDATE DYNAMICALLY CREATED ACCOUNT VARIABLES.
+	private function update_fs_ivars()
+	{
+		// LOOP OVER ACCOUNT OPTIONS ARRAY AND CREAT INSTANCE VARIABLES FOR EACH OPTION
+		// ALSO SET EACH TO THE CORRESPONDING WP_OPTION
+		foreach( $this->account_options as $fs_account_ivar ){
+		
+			// create ivar    			// set ivar to option with same name
+			$this->{$fs_account_ivar} = get_option($fs_account_ivar);
+		}
+	}
 
 
 	// REGISTER ADMIN PAGE AND CALL "create_admin_page()" TO CREATE PAGE
@@ -73,34 +81,29 @@ class WP_FlightStats{
 		// CHECK IF SETTING ADMIN FORM HAS BEEN SUBMITTED
 		if ( isset($_POST['flightstats_admin_submitted']) )
 		{			
-			// CHECK IF USER WANTS TO DELETE ACCOUNT SETTINGS AND CALL 'flightstats_account_reset()'
+			// CHECK IF USER WANTS TO DELETE ACCOUNT SETTINGS
 			if ( isset($_POST['FS_Delete']) )
-				 { $this->flightstats_account_reset(); }
-			// ELSE UPDATE SETTING WITH 'fs_update_account_settings()'
-			else { $this->fs_update_account_settings(); }
-		}	
-
+			{
+				foreach( $this->account_options as $fs_wp_option ){
+					update_option( $fs_wp_option, '' );
+				}
+			}
+			// ELSE UPDATE SETTING WITH
+			else
+			{
+				foreach( $this->account_options as $fs_wp_option ){
+					update_option( $fs_wp_option, $_POST[$fs_wp_option] );
+				}
+			}
+		}
+			
+		// UPDATE ACCOUNT SETTINGS VARIABLES
+		$this->update_fs_ivars();
+		
 		// INCLUDE ADMIN PAGE HTML CONTENT
 		require 'FS_Admin_Page.php';
 	}
 
-
-
-	// CALLED WHEN ACCOUNT SETTINGS ARE UPDATED IN THE FS ADMIN MENU
-	private function fs_update_account_settings()
-	{
-		echo '<pre>';
-		var_dump($_POST);
-		echo '</pre>';
-	}
-
-	// CALLED WHEN ACCOUNT SETTINGS ARE DELETED IN THE FS ADMIN MENU
-	private function flightstats_account_reset()
-	{
-		echo '<pre>';
-		var_dump($_POST);
-		echo '</pre>';
-	}
 
 
 
