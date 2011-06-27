@@ -99,12 +99,22 @@ class WP_FlightStats{
 		 *
 		 * ----------------------------------
 		 */
-		// RETURN THE GENERIC FORM FOR QUERIENG FLIGHTSTATS RSS FEED
-		// -- note * cannot include as file content needs to be 'returned' for the sake of the page structure
-		$fs_query_form = require('views/query_form.php');
 		
-		return $fs_query_form;
+		if( $this->FS_GUID_flight || $this->FS_GUID_route ){
 		
+			// RETURN THE GENERIC FORM FOR QUERIENG FLIGHTSTATS RSS FEED
+			// note * include in ob_buffer and assign to variable in order to return through shortcode.
+			ob_start(); // start buffer
+			require( 'views/query_form.php' ); // include form
+			$fs_query_form = ob_get_contents(); // assign buffer contents to variable
+			ob_end_clean(); // end buffer and remove buffer contents
+			
+			return $fs_query_form ;
+		
+		}else{
+		
+			// DISPLAY ERROR MESSAGE IF NO GUID SUPPLIED
+			return '<p style="margin: 10px; padding: 5px; background: #f00; text-align:center; font-weight:bold; color: #000;">Please supply a valid FlightStats GUID</p>'; }
 	}
 
 
