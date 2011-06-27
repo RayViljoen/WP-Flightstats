@@ -123,7 +123,10 @@ class WP_FlightStats{
 		 */
 		
 		// RETURN THE GENERIC FORM FOR QUERIENG FLIGHTSTATS RSS FEED
-		return ( require 'views/query_form.php');
+		// -- note * cannot include as file content needs to be 'returned' for the sake of the page structure
+		$fs_query_form = file_get_contents('views/query_form.php', FILE_USE_INCLUDE_PATH);
+		
+		return $fs_query_form;
 		
 	}
 
