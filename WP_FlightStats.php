@@ -42,6 +42,9 @@ class WP_FlightStats{
 		// SHORTCODE HOOK TO 'fs_shortcode()'
 		add_shortcode( 'flightstats', array( &$this, 'fs_shortcode' ) );
 		
+		// INCLUDE ANY PLUGIN STYLES
+		add_action( 'wp_head', array( &$this, 'fs_stylesheet' ) );
+		
 
 	} // ***  __construct END ***
 	
@@ -115,6 +118,13 @@ class WP_FlightStats{
 		
 			// DISPLAY ERROR MESSAGE IF NO GUID SUPPLIED
 			return '<p style="margin: 10px; padding: 5px; background: #f00; text-align:center; font-weight:bold; color: #000;">Please supply a valid FlightStats GUID</p>'; }
+	}
+	
+	
+	
+	public function fs_stylesheet()
+	{
+		echo '<link rel="stylesheet" media="screen" type="text/css" href="'.WP_CONTENT_URL.'/plugins/WP-Flightstats/views/css/shortcode_styles.css">';
 	}
 
 
