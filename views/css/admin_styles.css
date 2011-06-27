@@ -15,7 +15,7 @@
 
 #FS-Admin h3 {
 	margin:0;
-	padding-bottom:30px;
+	padding:10px 0 30px 10px;
 	clear:both
 }
 
@@ -24,11 +24,12 @@
 	padding:3px 40px 3px 30px;
 	display:inline-block
 }
-#FS-Admin p .opt{
-	font-size: 12px;
+#FS-Admin .opt{
+	font-size: 11px;
 	color: #999;
 	font-style: italic;
-	padding-left: 7px;
+	font-weight: 100;
+	padding-left: 15px;
 }
 
 #FS-Admin p input {
