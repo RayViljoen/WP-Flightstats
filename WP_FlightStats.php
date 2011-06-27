@@ -13,17 +13,35 @@ class WP_FlightStats{
 	 * E.G. $this->FS_username
 	 *************************************************************/
 	private $account_options = array(
+		
 		'FS_username',
 		'FS_account',
 		'FS_password',
 		'FS_GUID_airport',
 		'FS_GUID_route',
 		'FS_GUID_flight'
+		
 	);
+
+
+	
+	// USED TO CREATE & UPDATE DYNAMICALLY CREATED ACCOUNT VARIABLES.
+	private function update_fs_ivars()
+	{
+		// LOOP OVER ACCOUNT OPTIONS ARRAY AND CREAT INSTANCE VARIABLES FOR EACH OPTION
+		// ALSO SET EACH TO THE CORRESPONDING WP_OPTION
+		foreach( $this->account_options as $fs_account_ivar ){
+		
+			// create ivar    			// set ivar to option with same name
+			$this->{$fs_account_ivar} = get_option($fs_account_ivar);
+		}
+	}
+
+
 
 	// CONSTRUCTOR TO SET PLACEHOLDERS ON ACTIVATION AND CREATE AN INSTANCE VARIABLE FOR EACH ACCOUNT OPTION
 	public function __construct()
-	{
+	{	
 		// Check if options has been set or alternitively set on activation
 		if( !get_option('FS_Options_Set') )
 		{
@@ -45,22 +63,10 @@ class WP_FlightStats{
 
 		// SHORTCODE HOOK TO 'fs_shortcode()'
 		add_shortcode( 'flightstats', array( &$this, 'fs_shortcode' ) );
+		
 
 	} // ***  __construct END ***
 	
-	
-	
-	// USED TO CREATE & UPDATE DYNAMICALLY CREATED ACCOUNT VARIABLES.
-	private function update_fs_ivars()
-	{
-		// LOOP OVER ACCOUNT OPTIONS ARRAY AND CREAT INSTANCE VARIABLES FOR EACH OPTION
-		// ALSO SET EACH TO THE CORRESPONDING WP_OPTION
-		foreach( $this->account_options as $fs_account_ivar ){
-		
-			// create ivar    			// set ivar to option with same name
-			$this->{$fs_account_ivar} = get_option($fs_account_ivar);
-		}
-	}
 
 
 	// REGISTER ADMIN PAGE AND CALL "create_admin_page()" TO CREATE PAGE
@@ -101,24 +107,25 @@ class WP_FlightStats{
 		$this->update_fs_ivars();
 		
 		// INCLUDE ADMIN PAGE HTML CONTENT
-		require 'FS_Admin_Page.php';
+		require 'views/admin_page.php';
 	}
-
-
-
-
-	// CALLED WHEN SHORTCODE IS USED - RESPONSIBLE FOR SHORTCODE OUTPUT
+	
+	
+	
+	// INITILISE INSTANCE OF 'fs_shortcode'. - CALLED FROM SHORTCODE HOOK IN __constructor
 	public function fs_shortcode()
-	{
-
+	{	
+		/* ----------------------------------
+		 *
+		 *	INCLUDE ONE OF THE THEMES SELECTED FROM THE ADMIN MENU  --- NOT YET DONE 
+		 *
+		 * ----------------------------------
+		 */
 		
-
+		// RETURN THE GENERIC FORM FOR QUERIENG FLIGHTSTATS RSS FEED
+		return ( require 'views/query_form.php');
+		
 	}
-
-
-
-
-
 
 
 } // --- WP_FlightStats --- end ---

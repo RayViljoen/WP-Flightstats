@@ -19,8 +19,8 @@ Author URI: http://fubra.com
 
 
 // INCLUDE MAIN FLIGHTSTATS CLASS
-require 'lib/WP_FlightStats.php';
+	require 'WP_FlightStats.php';
 
 
 // INITIALISE FLIGHTSTATS PLUGIN
-   new WP_FlightStats();
+	new WP_FlightStats();
