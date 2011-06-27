@@ -21,24 +21,10 @@
         	<a class="fs_dev_link" target="_blank" href="https://www.flightstats.com/developers/">Flightstats Developer Center</a>
 		</h3>
 
-        <p><label for="FS_account">Account ID:</label><input placeholder="Account ID" id="FS_account" type="text" name="FS_account" value="<?php echo $this->FS_account; ?>"></p>
-
-        <p><label for="FS_username">Username:</label><input placeholder="Username / User ID" id="FS_username" type="text" name="FS_username" value="<?php echo $this->FS_username; ?>"></p>
-
-        <p><label for="FS_password">Password:</label><input placeholder="Password" id="FS_password" type="password" name="FS_password" value="<?php echo $this->FS_password; ?>"></p>
-
-		<p class="guid_descr">
-			<span>The plugin will provide extended search options based on the GUIDs supplied.</span>
-			<br />* Minimum 1 GUID is required for the plugin to function.
-		</p>
-
-        <p class="guid"><label for="FS_GUID_airport">FlightStatusByAirport GUID:</label><input placeholder="FlightStatusByAirport GUID" id="FS_GUID_airport" type="text" name="FS_GUID_airport" value="<?php echo $this->FS_GUID_airport; ?>"></p>
-
-        <p class="guid"><label for="FS_GUID_route">FlightStatusByRoute GUID:</label><input placeholder="FlightStatusByRoute GUID" id="FS_GUID_route" type="text" name="FS_GUID_route" value="<?php echo $this->FS_GUID_route; ?>"></p>
-
-        <p class="guid"><label for="FS_GUID_flight">FlightStatusByFlight GUID:</label><input placeholder="FlightStatusByFlight GUID" id="FS_GUID_flight" type="text" name="FS_GUID_flight" value="<?php echo $this->FS_GUID_flight; ?>"></p>
+        <p><label for="FS_GUID_route">FlightStatusByRoute GUID:</label><input placeholder="FlightStatusByRoute GUID" id="FS_GUID_route" type="text" name="FS_GUID_route" value="<?php echo $this->FS_GUID_route; ?>"></p>
+        <p><label for="FS_GUID_flight">FlightStatusByFlight GUID:</label><input placeholder="FlightStatusByFlight GUID" id="FS_GUID_flight" type="text" name="FS_GUID_flight" value="<?php echo $this->FS_GUID_flight; ?>"><span class="opt"> * optional</span></p>
 		
-		
+		 <!-- REMOVE WHEN ADDING THEMES -->
 		<p style="padding:50px 0 0; font-size:25px; text-align:center; font-style:italic">
 		-------------------------------------------------------------<br/>
 		ADD A FEW OPTIONAL THEMES<br/>
@@ -48,8 +34,8 @@
     	
     	<p class="submit">
 			<input type="submit" name="FS_Update" class="button-primary" value="Save Changes">
-			<input type="submit" name="FS_Delete" class="delete-button" value="Delete Account Settings">
+			<input type="submit" name="FS_Delete" class="delete-button" value="Delete Guids">
 		</p>
 		
     </form>
-    <p id="catn_badge">Brought to you by the experts at <a href="http://catn.com">CatN.</a></p>
+    <p id="author_mention">Brought to you by the experts at <a href="http://catn.com">CatN.</a></p>

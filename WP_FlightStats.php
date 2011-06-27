@@ -7,37 +7,16 @@ class WP_FlightStats{
 	// FLIGHTSTATS RSS QUERY URL
 	const FS_RSS = 'http://www.flightstats.com/go/rss/flightStatusByRoute.do?';
 
-	/*************************************************************
-	 * FLIGHTSTATS ACCOUNT OPTIONS:
-	 * EACH OPTION WILL CREATE AN INSTANCE VARIABLE ACCESSIBLE WITH THE SAME NAME AS THE ARRAY OPTION
-	 * E.G. $this->FS_username
-	 *************************************************************/
-	private $account_options = array(
-		
-		'FS_username',
-		'FS_account',
-		'FS_password',
-		'FS_GUID_airport',
-		'FS_GUID_route',
-		'FS_GUID_flight'
-		
-	);
-
-
+	// FLIGHTSTATS GUIDs:
+	private $FS_GUID_route;
+	private $FS_GUID_flight;
 	
-	// USED TO CREATE & UPDATE DYNAMICALLY CREATED ACCOUNT VARIABLES.
-	private function update_fs_ivars()
+	// USED TO EITHER SET OR UPDATE 'GUIDs' VARS 
+	private function update_guids()
 	{
-		// LOOP OVER ACCOUNT OPTIONS ARRAY AND CREAT INSTANCE VARIABLES FOR EACH OPTION
-		// ALSO SET EACH TO THE CORRESPONDING WP_OPTION
-		foreach( $this->account_options as $fs_account_ivar ){
-		
-			// create ivar    			// set ivar to option with same name
-			$this->{$fs_account_ivar} = get_option($fs_account_ivar);
-		}
+		$this->FS_GUID_route = get_option( 'FS_GUID_route' );
+		$this->FS_GUID_flight = get_option( 'FS_GUID_flight' );
 	}
-
-
 
 	// CONSTRUCTOR TO SET PLACEHOLDERS ON ACTIVATION AND CREATE AN INSTANCE VARIABLE FOR EACH ACCOUNT OPTION
 	public function __construct()
@@ -45,18 +24,17 @@ class WP_FlightStats{
 		// Check if options has been set or alternitively set on activation
 		if( !get_option('FS_Options_Set') )
 		{
-			// Create FlightStats account "wp_option" placeholders to avoid checking existence later.
-			foreach( $this->account_options as $fs_wp_option ){
-				add_option( $fs_wp_option, '' );
-			}
+			// SET GUID PLACEHOLDERS IN WP_OPTIONS
+			add_option( 'FS_GUID_route', '' );
+			add_option( 'FS_GUID_flight', '' );
 			// Set 'FS_Options_Set' so options are only created on activation.
 			add_option( 'FS_Options_Set', 'true' );
 		}
 		
-		// CREATE INSTANCE VARIABLES FOR ACCOUNT SETTINGS
-		$this->update_fs_ivars();
-		
-		// REGISTER WORDPRESS HOOKS
+		// SET GUID IVARS
+		$this->update_guids();
+					
+		// ---- REGISTER WORDPRESS HOOKS ----
 
 		// ADMIN ACTION HOOK TO 'fs_admin()'
 		add_action('admin_menu', array( &$this, 'fs_admin_auth' ) );
@@ -90,22 +68,22 @@ class WP_FlightStats{
 			// CHECK IF USER WANTS TO DELETE ACCOUNT SETTINGS
 			if ( isset($_POST['FS_Delete']) )
 			{
-				foreach( $this->account_options as $fs_wp_option ){
-					update_option( $fs_wp_option, '' );
-				}
+				update_option( 'FS_GUID_route', '' );
+				update_option( 'FS_GUID_flight', '' );
+
 			}
 			// ELSE UPDATE SETTING WITH
 			else
 			{
-				foreach( $this->account_options as $fs_wp_option ){
-					update_option( $fs_wp_option, $_POST[$fs_wp_option] );
-				}
+				update_option( 'FS_GUID_route', $_POST['FS_GUID_route'] );
+				update_option( 'FS_GUID_flight', $_POST['FS_GUID_flight'] );
 			}
-		}
 			
-		// UPDATE ACCOUNT SETTINGS VARIABLES
-		$this->update_fs_ivars();
-		
+			// UPDATE GUID IVARS
+			$this->update_guids();
+
+		}
+					
 		// INCLUDE ADMIN PAGE HTML CONTENT
 		require 'views/admin_page.php';
 	}
@@ -113,7 +91,7 @@ class WP_FlightStats{
 	
 	
 	// INITILISE INSTANCE OF 'fs_shortcode'. - CALLED FROM SHORTCODE HOOK IN __constructor
-	public function fs_shortcode()
+	public function fs_shortcode($atts)
 	{	
 		/* ----------------------------------
 		 *
@@ -121,7 +99,6 @@ class WP_FlightStats{
 		 *
 		 * ----------------------------------
 		 */
-		
 		// RETURN THE GENERIC FORM FOR QUERIENG FLIGHTSTATS RSS FEED
 		// -- note * cannot include as file content needs to be 'returned' for the sake of the page structure
 		$fs_query_form = file_get_contents('views/query_form.php', FILE_USE_INCLUDE_PATH);
