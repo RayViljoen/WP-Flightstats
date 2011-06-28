@@ -40,7 +40,6 @@ class WP_FlightStats{
 		
 		// INCLUDE ANY PLUGIN STYLES
 		add_action( 'wp_head', array( &$this, 'fs_stylesheet' ) );
-		
 
 	} // ***  __construct END ***
 	
@@ -91,15 +90,12 @@ class WP_FlightStats{
 	// INITILISE INSTANCE OF 'fs_shortcode'. - CALLED FROM SHORTCODE HOOK IN __constructor
 	public function fs_shortcode($atts)
 	{	
-		 
-		 var_dump($_POST);
-		
 		// CHECK FOR POST REQUEST AND CALL 'rss' METHOD FROM 'FS_Query' PASSING POST ARRAY.
 		// METHOD WILL RETURN RESULTS VIEW
 		if( isset( $_POST['fs_query'] ) ){
 			
-			$fs_rss_result = FS_Query::rss( $_POST );
-			return $fs_rss_result;		
+			$fs_rss_result = FS_Query::rss();
+			return $fs_rss_result;	
 		}
 		
 		// CHECK GUIDs ARE SET BEFORE DISPLAYING QUERY FORM
@@ -125,7 +121,7 @@ class WP_FlightStats{
 	
 	public function fs_stylesheet()
 	{
-		echo /* OUTPUT LINK TO SELECTED STYLESHEET HERE */;
+		/* ECHO OUTPUT LINK TO SELECTED STYLESHEET HERE */
 	}
 
 
