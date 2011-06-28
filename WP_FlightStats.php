@@ -94,7 +94,7 @@ class WP_FlightStats{
 		// METHOD WILL RETURN RESULTS VIEW
 		if( isset( $_POST['fs_query'] ) ){
 			
-			$fs_rss_result = FS_Query::rss();
+			$fs_rss_result = FS_Query::query();
 			return $fs_rss_result;	
 		}
 		
