@@ -27,16 +27,13 @@
 			<p class="airport_input fs_schedule">
 				<label for="fs_sched_date">Departure date: </label>
 				<select id="fs_sched_date" name="fs_sched_date">
-					<option value="1" selected="selected">Today</option>
-					<option value="2">Yesterday</option>
-					<option value="3">Tomorrow</option>
+					<option value="today" selected="selected">Today</option>
+					<option value="yesterday">Yesterday</option>
+					<option value="tomorrow">Tomorrow</option>
 				</select>
 			</p>
 		
 		<?php endif; ?>
 		
 			<input type="hidden" name="fs_query" value="true" />
-			<p class="airport_input fs_submit" ><input type="submit" value="GO"/></p>
-
-	</form>
-</div>
+			<p class="airport_input fs_submit" ><input type="submit" val
