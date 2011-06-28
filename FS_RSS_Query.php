@@ -14,6 +14,10 @@ class FS_Query
 
 		// SANITIZE POST INPUT
 		$fs_rss_params = filter_var_array( $_POST, FILTER_SANITIZE_STRING );
+		
+		// CHECK IF FIELD HIDDEN WITH CSS HAS BEEN SUBMITTED WITH A VALUE.
+		// IF SO IT'S PROBABLY AN AUTOMATED SUBMISSION, SO RETURN ERROR MESSAGE.
+		if ( $fs_rss_params['fs_bot_check'] !== '' ){ return self::FS_ERROR_MISSING; }
 
 
 		// --------------------------- CREATE DATE ------
@@ -94,11 +98,11 @@ class FS_Query
 			$fs_query_string .= 'guid=';
 			$fs_query_string .= $route_guid;
 			$fs_query_string .= '&departureCode=';
-			$fs_query_string .= $param[1];
+			$fs_query_string .= $param[0];
 			$fs_query_string .= '&arrivalCode=';
-			$fs_query_string .= $param[2];
+			$fs_query_string .= $param[1];
 			$fs_query_string .= '&departureDate=';
-			$fs_query_string .= $fs_date;
+			$fs_query_string .= $date;
 			
 			// SUBMIT THE QUERY.
 			$flightstats_xml_result = file_get_contents($fs_query_string);
@@ -122,7 +126,7 @@ class FS_Query
 			$fs_query_string .= '&flightNumber=';
 			$fs_query_string .= $fs_flightNumber;
 			$fs_query_string .= '&departureDate=';
-			$fs_query_string .= $fs_date;
+			$fs_query_string .= $date;
 			
 			// SUBMIT THE QUERY.
 			$flightstats_xml_result = file_get_contents($fs_query_string);

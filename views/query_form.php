@@ -1,7 +1,12 @@
 <div id="wp-flightstats">
 <h2>Flight Status</h2>
 	<form action="" method="post" name="FlightStats">
-		
+	
+		<!-- HIDDEN WITH CSS TO TRICK ANY POSSBLE BOT SUBMISSIONS. IF SET DO NOT EXECUTE QUERY -->
+		<p style="display:none;">
+			<label for="fs_bot_check">If you can see this and you are human please leave it blank.</label>
+			<input id="fs_bot_check" type="text" name="fs_bot_check"
+		</p>
 		<?php if( $this->FS_GUID_flight ): ?>
 		
 			<p class="fs-description flight_no">Search By Flight No.</p>
