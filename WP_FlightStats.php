@@ -4,9 +4,6 @@
 
 class WP_FlightStats{
 
-	// FLIGHTSTATS RSS QUERY URL
-	const FS_RSS = 'http://www.flightstats.com/go/rss/flightStatusByRoute.do?';
-
 	// FLIGHTSTATS GUIDs:
 	private $FS_GUID_route;
 	private $FS_GUID_flight;
@@ -84,7 +81,6 @@ class WP_FlightStats{
 			
 			// UPDATE GUID IVARS
 			$this->update_guids();
-
 		}
 					
 		// INCLUDE ADMIN PAGE HTML CONTENT
@@ -96,13 +92,18 @@ class WP_FlightStats{
 	// INITILISE INSTANCE OF 'fs_shortcode'. - CALLED FROM SHORTCODE HOOK IN __constructor
 	public function fs_shortcode($atts)
 	{	
-		/* ----------------------------------
-		 *
-		 *	INCLUDE ONE OF THE THEMES SELECTED FROM THE ADMIN MENU  --- NOT YET DONE 
-		 *
-		 * ----------------------------------
-		 */
+		 
+		 var_dump($_POST);
 		
+		// CHECK FOR POST REQUEST AND CALL 'rss' METHOD FROM 'FS_Query' PASSING POST ARRAY.
+		// METHOD WILL RETURN RESULTS VIEW
+		if( isset( $_POST['fs_query'] ) ){
+			
+			$fs_rss_result = FS_Query::rss( $_POST );
+			return $fs_rss_result;		
+		}
+		
+		// CHECK GUIDs ARE SET BEFORE DISPLAYING QUERY FORM
 		if( $this->FS_GUID_flight || $this->FS_GUID_route ){
 		
 			// RETURN THE GENERIC FORM FOR QUERIENG FLIGHTSTATS RSS FEED
@@ -114,6 +115,7 @@ class WP_FlightStats{
 			
 			return $fs_query_form ;
 		
+		// IF AT LEAST ONE GUID IS NOT SET DISPLAY ERROR MESSAGE
 		}else{
 		
 			// DISPLAY ERROR MESSAGE IF NO GUID SUPPLIED
@@ -124,7 +126,7 @@ class WP_FlightStats{
 	
 	public function fs_stylesheet()
 	{
-		echo '<link rel="stylesheet" media="screen" type="text/css" href="'.WP_CONTENT_URL.'/plugins/WP-Flightstats/views/css/shortcode_styles.css">';
+		echo /* OUTPUT LINK TO SELECTED STYLESHEET HERE */;
 	}
 
 

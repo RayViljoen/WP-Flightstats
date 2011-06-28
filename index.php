@@ -20,7 +20,7 @@ Author URI: http://fubra.com
 
 // INCLUDE MAIN FLIGHTSTATS CLASS
 	require 'WP_FlightStats.php';
-
+	require 'FS_RSS_Query.php';
 
 // INITIALISE FLIGHTSTATS PLUGIN
 	new WP_FlightStats();
