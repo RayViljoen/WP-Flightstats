@@ -11,11 +11,6 @@ class FS_Query
 	// HANDLE RSS QUERY PARAMS, EXECUTION CALLS AND RESPONSES
 	static function query()
 	{	
-		// debugging ---------------------
-		echo '<pre>';
-		print_r($_POST);
-		echo '</pre>';
-		// debugging ---------------------
 
 		// SANITIZE POST INPUT
 		$fs_rss_params = filter_var_array( $_POST, FILTER_SANITIZE_STRING );
@@ -51,7 +46,7 @@ class FS_Query
 		// IF FLIGHT NO IS SUPPLIED QUERY IT ALONE.
 		if ( isset($fs_flight) ){
 
-			$fs_result = self::submit_rss( $fs_date, $fs_flight );
+			$fs_result = self::execute_query( $fs_date, $fs_flight );
 
 			// ! IMPORTANT ! // CHECK RETURNED submit_rss VALUE, IF THAT VALUE IS FALSE CONTINUE ON TO TRY QUERY BY ROUTE - ( INCORRECT FLIGHT NO. )
 			if ( $fs_result ){
@@ -66,7 +61,7 @@ class FS_Query
 			$fs_route[] = $fs_dep;
 			$fs_route[] = $fs_arr;
 
-			$fs_result = self::submit_rss( $fs_date, $fs_route );
+			$fs_result = self::execute_query( $fs_date, $fs_route );
 
 			// ! IMPORTANT ! // CHECK RETURNED submit_rss VALUE, IF THAT VALUE IS ALSO FALSE CONTINUE TO RETURN ERROR MESSAGE
 			if ( $fs_result ){
@@ -84,7 +79,7 @@ class FS_Query
 
 
 	//HANDLES ACTUALL QUERY AND PARSES RESULTS - RETURNS EITHER PARSED RESULTS READY FOR OUTPUT OR FALSE.
-	private static function submit_rss( $date, $param )
+	private static function execute_query( $date, $param )
 	{	
 	
 		// GET GUIDs FROM WP_OPTIONS
