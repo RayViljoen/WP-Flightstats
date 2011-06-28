@@ -35,6 +35,7 @@
 		
 		<?php endif; ?>
 		
+			<input type="hidden" name="fs_query" value="true" />
 			<p class="airport_input fs_submit" ><input type="submit" value="GO"/></p>
 
 	</form>
