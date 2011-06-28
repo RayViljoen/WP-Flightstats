@@ -63,14 +63,14 @@ class WP_FlightStats{
 		// CHECK IF SETTING ADMIN FORM HAS BEEN SUBMITTED
 		if ( isset($_POST['flightstats_admin_submitted']) )
 		{			
-			// CHECK IF USER WANTS TO DELETE ACCOUNT SETTINGS
+			// CHECK IF USER SELECTED TO DELETE GUID SETTINGS
 			if ( isset($_POST['FS_Delete']) )
 			{
 				update_option( 'FS_GUID_route', '' );
 				update_option( 'FS_GUID_flight', '' );
 
 			}
-			// ELSE UPDATE SETTING WITH
+			// ELSE UPDATE SETTINGS WITH
 			else
 			{
 				update_option( 'FS_GUID_route', $_POST['FS_GUID_route'] );
@@ -90,7 +90,7 @@ class WP_FlightStats{
 	// INITILISE INSTANCE OF 'fs_shortcode'. - CALLED FROM SHORTCODE HOOK IN __constructor
 	public function fs_shortcode($atts)
 	{	
-		// CHECK FOR POST REQUEST AND CALL 'rss' METHOD FROM 'FS_Query' PASSING POST ARRAY.
+		// FIRST CHECK FOR POST REQUEST AND CALL 'query' METHOD FROM 'FS_Query'.
 		// METHOD WILL RETURN RESULTS VIEW
 		if( isset( $_POST['fs_query'] ) ){
 			
@@ -98,6 +98,7 @@ class WP_FlightStats{
 			return $fs_rss_result;	
 		}
 		
+		// IF NO $_POST['fs_query'] THEN JUST CONTINUE AS NORMAL DISPLAYING THE FORM
 		// CHECK GUIDs ARE SET BEFORE DISPLAYING QUERY FORM
 		if( $this->FS_GUID_flight || $this->FS_GUID_route ){
 		
