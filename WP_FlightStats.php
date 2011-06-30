@@ -38,7 +38,7 @@ class WP_FlightStats{
 		// SHORTCODE HOOK TO 'fs_shortcode()'
 		add_shortcode( 'flightstats', array( &$this, 'fs_shortcode' ) );
 		
-		// INCLUDE ANY PLUGIN STYLES AND INCLUDE JQUERY LIB
+		// INCLUDE ANY PLUGIN STYLES
 		add_action( 'wp_head', array( &$this, 'fs_theme' ) );
 		
 		// INCLUDE JQUERY IF NOT ALREADY
