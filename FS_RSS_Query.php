@@ -119,6 +119,9 @@ class FS_Query
 			
 			// SET OUTPUT CLASS TO fs_multiple - USED TO INSERT UNIQUE CSS CLASS TO RETURN RESULTS
 			$fs_css_class = 'fs_single';
+			
+			// SET QUERY TITLE
+			$fs_result_title = 'Information for flights from '.$param[0].' to '.$param[1].'.';
 
 		
 		}
@@ -148,6 +151,9 @@ class FS_Query
 			
 			// SET OUTPUT CLASS TO fs_single - USED TO INSERT UNIQUE CSS CLASS TO RETURN RESULTS
 			$fs_css_class = 'fs_single';
+			
+			// SET QUERY TITLE
+			$fs_result_title = 'Information for flight '.$fs_airlineCode.$fs_flightNumber;
 		
 		}
 		
@@ -176,7 +182,9 @@ class FS_Query
 		// NO ERROR RETURNED, SO CONTINUE TO LOOP OVER FLIGHTS AND POPULATE RETURN STRING
 		
 		// STRING TO BE RETURNED
-		$fs_results = '<div id="fs_results" class="'.$fs_css_class.'" >'.$fallback_message.'<ul>';
+		$fs_results  = '<div id="fs_results" class="'.$fs_css_class.'" >';
+		$fs_results .= '<h3>'.$fs_result_title.'</h3>';
+		$fs_results .= $fallback_message.'<ul>';
 		
 		foreach( $fs_xml_obj->channel->item as $item ){
 			$fs_results .= '<li>'.$item->description.'</li>';
@@ -184,8 +192,10 @@ class FS_Query
 		
 		$fs_results .= '</ul></div>';
 		
-		
-		
+		// CHANGE ACTUAL TO LANDED FOR CLARITY
+		$fs_results = str_ireplace( 'Actual', 'Landed', $fs_results );
+
+
 		return $fs_results;
 	}
 
