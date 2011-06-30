@@ -39,3 +39,5 @@
 		
     </form>
     <p id="author_mention">Brought to you by the experts at <a href="http://catn.com">CatN.</a></p>
+    
+    <script type="text/javascript" src="<?php echo WP_PLUGIN_URL; ?>/WP-Flightstats/javascript/admin_scripts.js"></script>

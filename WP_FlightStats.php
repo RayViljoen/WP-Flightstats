@@ -38,12 +38,14 @@ class WP_FlightStats{
 		// SHORTCODE HOOK TO 'fs_shortcode()'
 		add_shortcode( 'flightstats', array( &$this, 'fs_shortcode' ) );
 		
-		// INCLUDE ANY PLUGIN STYLES
-		add_action( 'wp_head', array( &$this, 'fs_stylesheet' ) );
-
+		// INCLUDE ANY PLUGIN STYLES AND INCLUDE JQUERY LIB
+		add_action( 'wp_head', array( &$this, 'fs_theme' ) );
+		
+		// INCLUDE JQUERY IF NOT ALREADY
+		add_action( 'init', function(){ wp_enqueue_script("jquery"); } );
+				
 	} // ***  __construct END ***
 	
-
 
 	// REGISTER ADMIN PAGE AND CALL "create_admin_page()" TO CREATE PAGE
 	public function fs_admin_auth()
@@ -120,8 +122,8 @@ class WP_FlightStats{
 	
 	
 	
-	public function fs_stylesheet()
-	{
+	public function fs_theme()
+	{	
 		/* ECHO OUTPUT LINK TO SELECTED STYLESHEET HERE */
 	}
 
