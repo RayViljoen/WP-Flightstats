@@ -5,9 +5,14 @@ class FS_Query
 
 	// FLIGHTSTATS RSS QUERY URL
 	const FS_RSS = 'http://www.flightstats.com/go/rss/';
-
+	
+	// ERROR MESSAGE
 	const FS_ERROR_MISSING = '<p class="fs_error">There was a problem with your request.<br />Please check the information you entered and try again. <a href="" >Try Again</a></p>';
-
+	
+	// SET TO TRUE IF FIRST QUERY WITH FLIGHT NO FAILS.
+	// BY KNOWING THIS A MESSAGE CAN BE ADDED EXPLAINING WHY MULTIPLE RESULTS WHERE RETURNED ( ASSUMING ROUTE WAS ALSO PROVIDED )
+	static protected $flight_no_failed = FALSE;
+	
 	// HANDLE RSS QUERY PARAMS, EXECUTION CALLS AND RESPONSES
 	static function query()
 	{	
@@ -56,6 +61,10 @@ class FS_Query
 			if ( $fs_result ){
 				return $fs_result; // ------------ POSSIBBLE RETURN ----
 			}
+			
+			// SET TO TRUE SO MESSAGE CAN BE ADDED EXPLAINING ALTERNITIVE QUERY
+			self::$flight_no_failed = TRUE;
+		
 		}
 
 		// FROM HERE THE FLIGHT NO QUERY EITHER RETURNED FALSE OR WASN'T SET, SO TRY QUERY WITH AIRPORT LOCATIONS
@@ -107,6 +116,10 @@ class FS_Query
 
 			// SUBMIT THE QUERY.
 			$flightstats_xml_result = file_get_contents($fs_query_string);
+			
+			// SET OUTPUT CLASS TO fs_multiple - USED TO INSERT UNIQUE CSS CLASS TO RETURN RESULTS
+			$fs_css_class = 'fs_single';
+
 		
 		}
 		// ELSE IF $param IS NOT ARRAY FLIGHT NO WAS PASSED AND QUERY NEEDS TO BE DONE BY FLIGHT NO.
@@ -132,27 +145,48 @@ class FS_Query
 			
 			// SUBMIT THE QUERY.
 			$flightstats_xml_result = file_get_contents($fs_query_string);
+			
+			// SET OUTPUT CLASS TO fs_single - USED TO INSERT UNIQUE CSS CLASS TO RETURN RESULTS
+			$fs_css_class = 'fs_single';
 		
 		}
 		
-		
+
 		// --------------------- PARSE XML RESPONSE HERE --------------------------------------------
 		
-		$xml = simplexml_load_string( $flightstats_xml_result );
+		$fs_xml_obj = simplexml_load_string( $flightstats_xml_result );
 		
 		// CHECK FOR ERROR
 		
 		// FIND ELEMENT WITH ERROR VALUE
-		$fs_e = $xml->channel->item[0]->guid;
+		$fs_e = $fs_xml_obj->channel->item[0]->guid;
 		// CHECK VALUE AND RETURN ERROR MESSAGE IF REQUEST FAILED
 		if( $fs_e == 'Error' ){ 
-			return self::FS_ERROR_MISSING;
+			return false; // ------------ POSSIBBLE RETURN ----
 		}
 		
+		// CHECK WHETHER THIS IS THE FIRST REQUEST OR A FALLBACK BY ROUTES ( SHOULD FLIGHT NO FAIL AND ROUTE IS ALSO PROVIDED )
+		// IF IT IS THE FALLBACK REQUEST PRVIDE A CUSTOM MESSAGE TO THE USER NOTING THIS
+		if ( self::$flight_no_failed === TRUE ){ 
+			$fallback_message = '<p>No results were found for the Flight number, however flights were found based on the route provived.</p>';
+		}else{
+			$fallback_message = '';			
+		}
+		
+		// NO ERROR RETURNED, SO CONTINUE TO LOOP OVER FLIGHTS AND POPULATE RETURN STRING
+		
+		// STRING TO BE RETURNED
+		$fs_results = '<div id="fs_results" class="'.$fs_css_class.'" >'.$fallback_message.'<ul>';
+		
+		foreach( $fs_xml_obj->channel->item as $item ){
+			$fs_results .= '<li>'.$item->description.'</li>';
+		}
+		
+		$fs_results .= '</ul></div>';
 		
 		
 		
-		return 'RESULTS FROM FLIGHTSTATS';
+		return $fs_results;
 	}
 
 
