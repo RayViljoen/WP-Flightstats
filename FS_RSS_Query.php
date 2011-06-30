@@ -4,7 +4,7 @@ class FS_Query
 {
 
 	// FLIGHTSTATS RSS QUERY URL
-	const FS_RSS = 'http://www.flightstats.com/go/rss/flightStatusByRoute.do?';
+	const FS_RSS = 'http://www.flightstats.com/go/rss/';
 
 	const FS_ERROR_MISSING = '<p class="fs_error">There was a problem with your request.<br />Please check the information you entered and try again. <a href="" >Try Again</a></p>';
 
@@ -95,6 +95,7 @@ class FS_Query
 		{
 			// BUILD QUERY STRING
 			$fs_query_string  = self::FS_RSS;
+			$fs_query_string .= 'flightStatusByRoute.do?';
 			$fs_query_string .= 'guid=';
 			$fs_query_string .= $route_guid;
 			$fs_query_string .= '&departureCode=';
@@ -103,7 +104,7 @@ class FS_Query
 			$fs_query_string .= $param[1];
 			$fs_query_string .= '&departureDate=';
 			$fs_query_string .= $date;
-			
+
 			// SUBMIT THE QUERY.
 			$flightstats_xml_result = file_get_contents($fs_query_string);
 		
@@ -119,6 +120,7 @@ class FS_Query
 		
 			// BUILD QUERY STRING
 			$fs_query_string  = self::FS_RSS;
+			$fs_query_string .= 'flightStatusByFlight.do?';
 			$fs_query_string .= 'guid=';
 			$fs_query_string .= $flight_guid;
 			$fs_query_string .= '&airlineCode=';
@@ -134,9 +136,36 @@ class FS_Query
 		}
 		
 		
+		// --------------------- PARSE XML RESPONSE HERE --------------------------------------------
+		
+		$xml = simplexml_load_string( $flightstats_xml_result );
+		
+		// CHECK FOR ERROR
+		
+		// FIND ELEMENT WITH ERROR VALUE
+		$fs_e = $xml->channel->item[0]->guid;
+		// CHECK VALUE AND RETURN ERROR MESSAGE IF REQUEST FAILED
+		if( $fs_e == 'Error' ){ 
+			return self::FS_ERROR_MISSING;
+		}
+		
+		
+		
 		
 		return 'RESULTS FROM FLIGHTSTATS';
 	}
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
