@@ -7,6 +7,8 @@ class WP_FlightStats{
 	private $FS_GUID_route;
 	private $FS_GUID_flight;
 	
+	public $FS_plugin_path;
+	
 	// USED TO EITHER SET OR UPDATE 'GUIDs' VARS 
 	private function update_guids()
 	{
@@ -26,6 +28,10 @@ class WP_FlightStats{
 			// Set 'FS_Options_Set' so options are only created on activation.
 			add_option( 'FS_Options_Set', 'true' );
 		}
+		
+		// SET PLUGIN PATH REGARDLESS OF CONTAINING DIRECTORY
+		$this->FS_plugin_path = plugins_url(  '/', __FILE__ );
+		
 		
 		// SET GUID IVARS
 		$this->update_guids();

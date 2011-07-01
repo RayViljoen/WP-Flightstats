@@ -38,6 +38,22 @@
 	color:#505050;
 	font-weight:700
 }
+#FS-Admin p a{
+	border:2px solid #ccc;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	padding: 0 5px;
+	color: #21759B;
+	display: none;
+}
+
+
+#FS-Admin p a:hover{
+	cursor: pointer;
+	border:2px solid #21759B;
+	font-weight: bold;
+}
 
 #FS-Admin .fs_dev_link {
 	float:right;
@@ -59,7 +75,7 @@ div.updated {
 
 #FS-Admin p.submit {
 	margin:70px 0 0 20px;
-	padding:0
+	padding:0;
 }
 
 #FS-Admin p.submit input {
@@ -73,4 +89,20 @@ div.updated {
 
 #FS-Admin .delete-button {
 	float:right
+}
+
+#FS-Admin p.guid{
+	background-position: -999px;
+	width: 680px;
+}
+
+#FS-Admin p.fs_passed{
+		background-position: 640px 6px;
+}
+#FS-Admin p.fs_failed{
+	background-position: 640px -34px;
+}
+#FS-Admin p.fs_thinking a{
+	color: transparent;
+	border: none;
 }
