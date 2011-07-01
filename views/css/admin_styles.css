@@ -1,5 +1,5 @@
 .FS-Logo img {
-	padding:20px
+	padding:20px;
 }
 
 #FS-Admin {
@@ -10,54 +10,55 @@
 	-moz-border-radius:6px;
 	border-radius:6px;
 	padding:10px 15px 15px;
-	overflow:auto
+	overflow:auto;
 }
 
 #FS-Admin h3 {
 	margin:0;
 	padding:10px 0 30px 10px;
-	clear:both
+	clear:both;
 }
 
 #FS-Admin p label {
 	width:170px;
 	padding:3px 40px 3px 30px;
-	display:inline-block
+	display:inline-block;
 }
-#FS-Admin .opt{
-	font-size: 11px;
-	color: #999;
-	font-style: italic;
-	font-weight: 100;
-	padding-left: 15px;
+
+#FS-Admin .opt {
+	font-size:11px;
+	color:#999;
+	font-style:italic;
+	font-weight:100;
+	padding-left:15px;
 }
 
 #FS-Admin p input {
 	width:330px;
 	padding:5px;
 	color:#505050;
-	font-weight:700
+	font-weight:700;
 }
-#FS-Admin p a{
+
+#FS-Admin p a {
 	border:2px solid #ccc;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	border-radius:3px;
-	padding: 0 5px;
-	color: #21759B;
-	display: none;
+	padding:0 5px;
+	color:#21759B;
+	display:none;
 }
 
-
-#FS-Admin p a:hover{
-	cursor: pointer;
+#FS-Admin p a:hover {
+	cursor:pointer;
 	border:2px solid #21759B;
-	font-weight: bold;
+	font-weight:700;
 }
 
 #FS-Admin .fs_dev_link {
 	float:right;
-	font-size:12px
+	font-size:12px;
 }
 
 #author_mention {
@@ -65,12 +66,11 @@
 	text-align:right;
 	font-size:10px;
 	padding-left:30px;
-	margin:5px 35px 0
+	margin:5px 35px 0;
 }
 
-
 div.updated {
-	margin:10px 30px 20px 15px
+	margin:10px 30px 20px 15px;
 }
 
 #FS-Admin p.submit {
@@ -80,29 +80,31 @@ div.updated {
 
 #FS-Admin p.submit input {
 	width:150px;
-	color:#fff
+	color:#fff;
 }
 
 #FS-Admin p.submit input.delete-button {
-	color:#505050
+	color:#505050;
 }
 
 #FS-Admin .delete-button {
-	float:right
+	float:right;
 }
 
-#FS-Admin p.guid{
-	background-position: -999px;
-	width: 680px;
+#FS-Admin p.guid {
+	background-position:-999px;
+	width:680px;
 }
 
-#FS-Admin p.fs_passed{
-		background-position: 640px 6px;
+#FS-Admin p.fs_passed {
+	background-position:640px 6px;
 }
-#FS-Admin p.fs_failed{
-	background-position: 640px -34px;
+
+#FS-Admin p.fs_failed {
+	background-position:640px -34px;
 }
-#FS-Admin p.fs_thinking a{
-	color: transparent;
-	border: none;
+
+#FS-Admin p.fs_thinking a {
+	color:transparent;
+	border:none;
 }
